@@ -22,7 +22,9 @@ module.exports = {
 		'no-console': 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'indent': ['error', 4],
-        'semi': ['error', 'always'],
+		'semi': ['error', 'always'],
+		'no-extra-semi': 0,
+		'no-mixed-spaces-and-tabs': 0
 	},
 	parserOptions: {
 		parser: 'babel-eslint'
