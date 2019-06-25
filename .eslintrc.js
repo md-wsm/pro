@@ -21,10 +21,11 @@ module.exports = {
 		'no-var': 2,
 		'no-console': 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-        'indent': ['error', 4],
+        'indent': [0, 4],
 		'semi': ['error', 'always'],
 		'no-extra-semi': 0,
-		'no-mixed-spaces-and-tabs': 0
+		'no-mixed-spaces-and-tabs': 0,
+		'no-tabs': 0
 	},
 	parserOptions: {
 		parser: 'babel-eslint'

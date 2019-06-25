@@ -72,7 +72,7 @@ export default [
                 name: 'join_page',
                 meta: {
                     icon: '_qq',
-                    title: 'QQ群'
+                    title: '测试单元测试'
                 },
                 component: () => import('@/view/join-page.vue')
             }
