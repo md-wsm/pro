@@ -25,7 +25,8 @@ module.exports = {
 		'semi': ['error', 'always'],
 		'no-extra-semi': 0,
 		'no-mixed-spaces-and-tabs': 0,
-		'no-tabs': 0
+		'no-tabs': 0,
+		'eqeqeq': 2
 	},
 	parserOptions: {
 		parser: 'babel-eslint'
