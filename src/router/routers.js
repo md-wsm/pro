@@ -1,5 +1,5 @@
-import Main from '@/components/main';
-import parentView from '@/components/parent-view';
+import Main from '@/components/main'
+import parentView from '@/components/parent-view'
 
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
@@ -50,26 +50,26 @@ export default [
             }
         ]
     },
+    // {
+    //     path: '',
+    //     name: 'doc',
+    //     meta: {
+    //         title: '文档',
+    //         href: 'https://lison16.github.io/iview-admin-doc/#/',
+    //         icon: 'ios-book'
+    //     }
+    // },
     {
-        path: '',
-        name: 'doc',
-        meta: {
-            title: '文档',
-            href: 'https://lison16.github.io/iview-admin-doc/#/',
-            icon: 'ios-book'
-        }
-    },
-    {
-        path: '/join',
-        name: 'join',
+        path: '/wu',
+        name: 'wu',
         component: Main,
         meta: {
             hideInBread: true
         },
         children: [
             {
-                path: 'join_page',
-                name: 'join_page',
+                path: 'wu_page',
+                name: 'wu_page',
                 meta: {
                     icon: '_qq',
                     title: '测试单元测试'
@@ -487,4 +487,4 @@ export default [
         },
         component: () => import('@/view/error-page/404.vue')
     }
-];
+]
