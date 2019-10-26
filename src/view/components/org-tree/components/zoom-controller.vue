@@ -33,17 +33,17 @@ export default {
     },
     methods: {
         scale (type) {
-            const zoom = this.value + (type === 'down' ? -this.step : this.step);
+            const zoom = this.value + (type === 'down' ? -this.step : this.step)
             if (
                 (zoom < this.min && type === 'down') ||
         (zoom > this.max && type === 'up')
             ) {
-                return;
+                return
             }
-            this.$emit('input', zoom);
+            this.$emit('input', zoom)
         }
     }
-};
+}
 </script>
 
 <style lang="less">

@@ -23,17 +23,17 @@ export default {
     },
     computed: {
         countComputed () {
-            return this.hasRead ? 0 : this.count;
+            return this.hasRead ? 0 : this.count
         }
     },
     methods: {
         openErrorLoggerPage () {
             this.$router.push({
                 name: 'error_logger_page'
-            });
+            })
         }
     }
-};
+}
 </script>
 
 <style lang="less">

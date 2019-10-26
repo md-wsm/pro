@@ -4,5 +4,5 @@
 <script>
 export default {
     name: 'level_2_3'
-};
+}
 </script>

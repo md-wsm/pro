@@ -28,14 +28,14 @@ export default {
     data () {
         return {
             modalVisible: false
-        };
+        }
     },
     computed: {
         content () {
-            return this.$t('content');
+            return this.$t('content')
         }
     }
-};
+}
 </script>
 
 <style lang="less">

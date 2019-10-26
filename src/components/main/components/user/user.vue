@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import './user.less';
-import { mapActions } from 'vuex';
+import './user.less'
+import { mapActions } from 'vuex'
 export default {
     name: 'User',
     props: {
@@ -38,22 +38,22 @@ export default {
             this.handleLogOut().then(() => {
                 this.$router.push({
                     name: 'login'
-                });
-            });
+                })
+            })
         },
         message () {
             this.$router.push({
                 name: 'message_page'
-            });
+            })
         },
         handleClick (name) {
             switch (name) {
-            case 'logout': this.logout();
-                break;
-            case 'message': this.message();
-                break;
+            case 'logout': this.logout()
+                break
+            case 'message': this.message()
+                break
             }
         }
     }
-};
+}
 </script>

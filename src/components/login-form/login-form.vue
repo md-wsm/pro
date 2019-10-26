@@ -28,7 +28,7 @@ export default {
             default: () => {
                 return [
                     { required: true, message: '账号不能为空', trigger: 'blur' }
-                ];
+                ]
             }
         },
         passwordRules: {
@@ -36,7 +36,7 @@ export default {
             default: () => {
                 return [
                     { required: true, message: '密码不能为空', trigger: 'blur' }
-                ];
+                ]
             }
         }
     },
@@ -46,14 +46,14 @@ export default {
                 userName: 'super_admin',
                 password: ''
             }
-        };
+        }
     },
     computed: {
         rules () {
             return {
                 userName: this.userNameRules,
                 password: this.passwordRules
-            };
+            }
         }
     },
     methods: {
@@ -63,10 +63,10 @@ export default {
                     this.$emit('on-success-valid', {
                         userName: this.form.userName,
                         password: this.form.password
-                    });
+                    })
                 }
-            });
+            })
         }
     }
-};
+}
 </script>

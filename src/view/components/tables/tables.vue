@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import Tables from '_c/tables';
-import { getTableData } from '@/api/data';
+import Tables from '_c/tables'
+import { getTableData } from '@/api/data'
 export default {
     name: 'tables_page',
     components: {
@@ -34,36 +34,36 @@ export default {
                                 },
                                 on: {
                                     'on-ok': () => {
-                                        vm.$emit('on-delete', params);
-                                        vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex));
+                                        vm.$emit('on-delete', params)
+                                        vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
                                     }
                                 }
                             }, [
                                 h('Button', '自定义删除')
-                            ]);
+                            ])
                         }
                     ]
                 }
             ],
             tableData: []
-        };
+        }
     },
     methods: {
         handleDelete (params) {
-            console.log(params);
+            console.log(params)
         },
         exportExcel () {
             this.$refs.tables.exportCsv({
                 filename: `table-${(new Date()).valueOf()}.csv`
-            });
+            })
         }
     },
     mounted () {
         getTableData().then(res => {
-            this.tableData = res.data;
-        });
+            this.tableData = res.data
+        })
     }
-};
+}
 </script>
 
 <style>

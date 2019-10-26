@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import dayjs from 'dayjs';
-import { mapMutations } from 'vuex';
+import dayjs from 'dayjs'
+import { mapMutations } from 'vuex'
 export default {
     name: 'error_logger_page',
     data () {
@@ -28,7 +28,7 @@ export default {
                             <div>
                                 <icon size={16} type={row.type === 'ajax' ? 'md-link' : 'md-code-working'}></icon>
                             </div>
-                        );
+                        )
                     }
                 },
                 {
@@ -37,7 +37,7 @@ export default {
                     render: (h, { row }) => {
                         return (
                             <span>{ row.code === 0 ? '-' : row.code }</span>
-                        );
+                        )
                     }
                 },
                 {
@@ -54,17 +54,17 @@ export default {
                     render: (h, { row }) => {
                         return (
                             <span>{ dayjs(row.time).format('YYYY-MM-DD HH:mm:ss') }</span>
-                        );
+                        )
                     },
                     sortable: true,
                     sortType: 'desc'
                 }
             ]
-        };
+        }
     },
     computed: {
         errorList () {
-            return this.$store.state.app.errorList;
+            return this.$store.state.app.errorList
         }
     },
     methods: {
@@ -74,16 +74,16 @@ export default {
         exportData () {
             this.$refs.table.exportCsv({
                 filename: '错误日志.csv'
-            });
+            })
         }
     },
     activated () {
-        this.setHasReadErrorLoggerStatus();
+        this.setHasReadErrorLoggerStatus()
     },
     mounted () {
-        this.setHasReadErrorLoggerStatus();
+        this.setHasReadErrorLoggerStatus()
     }
-};
+}
 </script>
 
 <style>

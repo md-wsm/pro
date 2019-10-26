@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations } from 'vuex'
 export default {
     name: 'params',
     methods: {
@@ -25,10 +25,10 @@ export default {
                 params: {
                     id: this.$route.params.id
                 }
-            });
+            })
         }
     }
-};
+}
 </script>
 
 <style>
