@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h1>的花费很多水果和</h1>
-		<Table :columns="columns15" :data="data11" border show-summary :summary-method="handleSummary" max-height="600" ></Table>
+		<Table :columns="columns15" :data="data11" border show-summary :summary-method="handleSummary" max-height="1600" ></Table>
 	</div>
 </template>
 

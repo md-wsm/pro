@@ -1,12 +1,8 @@
 <template>
 	<Layout style="height: 100%" class="main">
-
 		<Header class="header-con">
 			<header-bar :collapsed="collapsed" @on-coll-change="handleCollapsedChange">
-				<!--<div class="logo-con" style="display: inline-block;">-->
-				<!--<img v-show="true" :src="maxLogo" key="max-logo"/>-->
-				<!--<img v-show="false" :src="minLogo" key="min-logo"/>-->
-				<!--</div>-->
+
 				<user :message-unread-count="unreadCount" :user-avatar="userAvatar"/>
 				<language v-if="$config.useI18n" @on-lang-change="setLocal" style="margin-right: 10px;"
 						  :lang="local"/>
