@@ -138,7 +138,9 @@
                 this.$emit('on-close', res, undefined, route)
             },
             handleClick (item) {
-                this.$emit('input', item)
+                if (!this.isCurrentTag(item)) {
+                    this.$emit('input', item)
+				}
             },
             showTitleInside (item) {
                 return showTitle(item, this)

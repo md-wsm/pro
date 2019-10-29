@@ -73,10 +73,10 @@ export default {
 }
 </script>
 
-<style lang="less">
-.full-screen-btn-con .ivu-tooltip-rel{
+<style lang="less" scoped>
+.full-screen-btn-con /deep/ .ivu-tooltip-rel{
   height: 64px;
-  line-height: 56px;
+  line-height: 64px;
   i{
     cursor: pointer;
   }

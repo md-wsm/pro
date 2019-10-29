@@ -105,7 +105,7 @@
         },
         computed: {
             textColor () {
-                console.log(this.menuList)
+                // console.log(this.menuList)
                 return this.theme === 'dark' ? '#fff' : '#495060'
             }
         },
