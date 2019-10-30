@@ -7,22 +7,23 @@
 		<!--    <sider-trigger :collapsed="collapsed" icon="md-menu" @on-change="handleCollpasedChange"></sider-trigger>-->
 		<!--    <custom-bread-crumb show-icon style="margin-left: 30px;" :list="breadCrumbList"></custom-bread-crumb>-->
 
-		<Menu mode="horizontal" theme="light" active-name="1" class="menu">
-			<MenuItem name="1">
-				<Icon type="ios-paper"/>
-				内容管理
-			</MenuItem>
-			<MenuItem name="2">
-				<Icon type="ios-people"/>
-				用户管理
-			</MenuItem>
-			<MenuItem name="3">新增和启动</MenuItem>
-			<MenuItem name="4">活跃分析</MenuItem>
-			<MenuItem name="5">时段分析</MenuItem>
-			<MenuItem name="6">新增和启动</MenuItem>
-			<MenuItem name="7">活跃分析</MenuItem>
-			<MenuItem name="8">时段分析</MenuItem>
-		</Menu>
+<!--		没用的-->
+<!--		<Menu mode="horizontal" theme="light" active-name="1" class="menu">-->
+<!--			<MenuItem name="1">-->
+<!--				<Icon type="ios-paper"/>-->
+<!--				内容管理-->
+<!--			</MenuItem>-->
+<!--			<MenuItem name="2">-->
+<!--				<Icon type="ios-people"/>-->
+<!--				用户管理-->
+<!--			</MenuItem>-->
+<!--			<MenuItem name="3">新增和启动</MenuItem>-->
+<!--			<MenuItem name="4">活跃分析</MenuItem>-->
+<!--			<MenuItem name="5">时段分析</MenuItem>-->
+<!--			<MenuItem name="6">新增和启动</MenuItem>-->
+<!--			<MenuItem name="7">活跃分析</MenuItem>-->
+<!--			<MenuItem name="8">时段分析</MenuItem>-->
+<!--		</Menu>-->
 
 		<div class="custom-content-con">
 			<slot></slot>
