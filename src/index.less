@@ -2,5 +2,85 @@
 @import '~view-design/src/styles/index.less';
 
 @menu-dark-title: #001529;
+//@menu-dark-title: #FFFFFF;
 @menu-dark-active-bg: #000c17;
 @layout-sider-background: #001529;
+@layout-sider-background: #FFFFFF;
+@primary-color: #1B84ED;
+
+//.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title {
+//	color: #464C5B;
+//}
+//.ivu-menu-dark.ivu-menu-vertical .ivu-menu-child-item-active > .ivu-menu-submenu-title {
+//	color: #464C5B;
+//}
+//.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item:hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title:hover {
+//	color: #1B84ED;
+//}
+//.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item:hover {
+//	color: #1B84ED;
+//}
+
+//左侧菜单,先如此做
+.ivu-menu-light.ivu-menu-vertical {
+	.ivu-menu-opened {
+		background: #F9F9F9;
+		.ivu-menu-submenu-title {
+			background: @layout-sider-background;
+		}
+		.ivu-menu-submenu-has-parent-submenu {
+			.ivu-menu-submenu-title {
+				background: transparent;
+			}
+		}
+	}
+	.ivu-menu-item-active {
+		&:not(.ivu-menu-submenu) {
+			background: #E8EAED;
+			&:after {
+				width: 0;
+			}
+		}
+	}
+	.ivu-menu-child-item-active {
+		& > .ivu-menu-submenu-title {
+			color: @primary-color;
+		}
+	}
+	.ivu-menu-submenu {
+		color: #464C5B;
+	}
+	.ivu-menu-item {
+		color: #464C5B;
+		&:hover {
+			color: #1B84ED;
+		}
+	}
+}
+//.ivu-menu-light.ivu-menu-vertical .ivu-menu-opened {
+//	background: #F9F9F9;
+//}
+//.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
+//	background: #E8EAED;
+//}
+//.ivu-menu-light.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title {
+//	background: @layout-sider-background;
+//}
+//.ivu-menu-light.ivu-menu-vertical .ivu-menu-child-item-active > .ivu-menu-submenu-title {
+//	color: @primary-color;
+//}
+//.ivu-menu-light.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-has-parent-submenu .ivu-menu-submenu-title {
+//	background: transparent;
+//}
+//.ivu-menu-light.ivu-menu-vertical .ivu-menu-submenu, .ivu-menu-light.ivu-menu-vertical .ivu-menu-item {
+//	color: #464C5B;
+//}
+////.ivu-menu-light.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu, .ivu-menu-light.ivu-menu-vertical .ivu-menu-opened .ivu-menu-item {
+////	color: #657180;
+////}
+//.ivu-menu-light.ivu-menu-vertical .ivu-menu-item:hover, .ivu-menu-light.ivu-menu-vertical .ivu-menu-submenu-title:hover {
+//	color: #1B84ED;
+//}
+//.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):after {
+//	width: 0;
+//}

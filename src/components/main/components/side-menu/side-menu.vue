@@ -63,7 +63,8 @@
             },
             theme: {
                 type: String,
-                default: 'dark'
+                // default: 'dark'
+                default: 'light'
             },
             rootIconSize: {
                 type: Number,
