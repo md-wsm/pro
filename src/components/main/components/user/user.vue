@@ -1,9 +1,10 @@
 <template>
   <div class="user-avatar-dropdown">
     <Dropdown @on-click="handleClick">
-      <Badge :dot="!!messageUnreadCount">
+      <Badge :dot="!!messageUnreadCount" style="margin-right: 5px;">
         <Avatar :src="userAvatar"/>
       </Badge>
+		<span>张三</span>
       <Icon :size="18" type="md-arrow-dropdown"></Icon>
       <DropdownMenu slot="list">
         <DropdownItem name="message">
