@@ -1,6 +1,5 @@
 <template>
 	<div class="header-bar flex">
-<!--		logo-->
 		<div  class="logo">
 			<img :src="logo" alt="logo">
 		</div>
@@ -15,73 +14,30 @@
 		<div class="logout">
 			<img :src="logout" alt="退出">
 		</div>
-		<!--	  <div class="logo-con" style="display: inline-block;">-->
-		<!--		  <img v-show="true" :src="maxLogo" key="max-logo"/>-->
-		<!--		  <img v-show="false" :src="minLogo" key="min-logo"/>-->
-		<!--	  </div>-->
-		<!--    <sider-trigger :collapsed="collapsed" icon="md-menu" @on-change="handleCollpasedChange"></sider-trigger>-->
-		<!--    <custom-bread-crumb show-icon style="margin-left: 30px;" :list="breadCrumbList"></custom-bread-crumb>-->
-
-<!--		没用的-->
-<!--		<Menu mode="horizontal" theme="light" active-name="1" class="menu">-->
-<!--			<MenuItem name="1">-->
-<!--				<Icon type="ios-paper"/>-->
-<!--				内容管理-->
-<!--			</MenuItem>-->
-<!--			<MenuItem name="2">-->
-<!--				<Icon type="ios-people"/>-->
-<!--				用户管理-->
-<!--			</MenuItem>-->
-<!--			<MenuItem name="3">新增和启动</MenuItem>-->
-<!--			<MenuItem name="4">活跃分析</MenuItem>-->
-<!--			<MenuItem name="5">时段分析</MenuItem>-->
-<!--			<MenuItem name="6">新增和启动</MenuItem>-->
-<!--			<MenuItem name="7">活跃分析</MenuItem>-->
-<!--			<MenuItem name="8">时段分析</MenuItem>-->
-<!--		</Menu>-->
-
 <!--		<div class="custom-content-con">-->
 <!--			<slot></slot>-->
 <!--		</div>-->
 	</div>
 </template>
 <script>
-    // import siderTrigger from './sider-trigger'
-    // import customBreadCrumb from './custom-bread-crumb'
-    // import './header-bar.less'
-    // import minLogo from '@/assets/images/logo-min.jpg'
-    // import maxLogo from '@/assets/images/logo.jpg'
 	import logo from '@/assets/images/logo.png'
     import logout from '@/assets/images/logout.png'
 
     export default {
-        // name: 'HeaderBar',
+        name: 'HeaderBar',
         components: {
-            // siderTrigger,
-            // customBreadCrumb
 			SomeInfo: () => import('./SomeInfo')
-        },
-        props: {
-            collapsed: Boolean
         },
         data () {
             return {
-                // minLogo,
-                // maxLogo,
                 logo,
                 logout,
                 menuList: [{ name: '系统管理', active: false }, { name: '系统字典', active: false }, { name: '租户管理', active: false }, { name: '子系统数据', active: false }]
             }
         },
         computed: {
-            breadCrumbList () {
-                return this.$store.state.app.breadCrumbList
-            }
         },
         methods: {
-            handleCollpasedChange (state) {
-                this.$emit('on-coll-change', state)
-            },
             handleClickItem (index) {
                 this.menuList.forEach(item => {
                     item.active = false

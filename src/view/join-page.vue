@@ -9,7 +9,7 @@
 	export default {
 		name: 'wu_page',
 		created () {
-			console.log(123)
+
 		},
 		data () {
 			return {

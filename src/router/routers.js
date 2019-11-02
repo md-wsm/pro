@@ -251,7 +251,7 @@ export default [
                         name: 'level_2_2_1',
                         meta: {
                             icon: 'md-funnel',
-                            title: '三级'
+                            title: '三级1'
                         },
                         component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
                     },
@@ -260,7 +260,7 @@ export default [
                         name: 'level_2_2_2',
                         meta: {
                             icon: 'md-funnel',
-                            title: '三级'
+                            title: '三级2'
                         },
                         component: () => import('@/view/multilevel/level-2-2/level-2-2-2.vue')
                     }

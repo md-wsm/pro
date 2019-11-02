@@ -11,6 +11,9 @@ export default {
         return {
             val: ''
         }
+    },
+	created () {
+        console.log(111)
     }
 }
 </script>

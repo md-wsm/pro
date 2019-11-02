@@ -90,35 +90,6 @@ export const getMenuByRouter = (list, access) => {
     return res
 }
 
-/**
- * @param {Array} routeMetched 当前路由metched
- * @returns {Array}
- */
-export const getBreadCrumbList = (route, homeRoute) => {
-    let homeItem = { ...homeRoute, icon: homeRoute.meta.icon }
-    let routeMetched = route.matched
-    if (routeMetched.some(item => item.name === homeRoute.name)) return [homeItem]
-    let res = routeMetched.filter(item => {
-        return item.meta === undefined || !item.meta.hideInBread
-    }).map(item => {
-        let meta = { ...item.meta }
-        if (meta.title && typeof meta.title === 'function') {
-            meta.__titleIsFunction__ = true
-            meta.title = meta.title(route)
-        }
-        let obj = {
-            icon: (item.meta && item.meta.icon) || '',
-            name: item.name,
-            meta: meta
-        }
-        return obj
-    })
-    res = res.filter(item => {
-        return !item.meta.hideInMenu
-    })
-    return [{ ...homeItem, to: homeRoute.path }, ...res]
-}
-
 export const getRouteTitleHandled = (route) => {
     let router = { ...route }
     let meta = { ...route.meta }
