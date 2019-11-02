@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import store from './store'
 import iView from 'view-design'
-import i18n from '@/locale'
 import config from '@/config'
 import importDirective from '@/directive'
 import { directive as clickOutside } from 'v-click-outside-x'
@@ -19,9 +18,7 @@ import 'v-org-tree/dist/v-org-tree.css'
 /* eslint-disable */
 if (process.env.NODE_ENV !== 'production') require('@/mock')
 
-Vue.use(iView, {
-	i18n: (key, value) => i18n.t(key, value)
-})
+Vue.use(iView)
 Vue.use(TreeTable)
 Vue.use(VOrgTree)
 /**
@@ -46,7 +43,6 @@ Vue.directive('clickOutside', clickOutside)
 new Vue({
 	el: '#app',
 	router,
-	i18n,
 	store,
 	render: h => h(App)
 })
