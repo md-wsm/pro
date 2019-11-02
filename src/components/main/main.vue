@@ -93,7 +93,6 @@
 				return list
 			},
 			menuList () {
- console.log(this.$store.getters)
 				return this.$store.getters.menuList
 			},
 			local () {
