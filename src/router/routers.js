@@ -1,5 +1,5 @@
 import Main from '@/components/main'
-import parentView from '@/components/parent-view'
+// import parentView from '@/components/parent-view'
 
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
@@ -38,7 +38,7 @@ export default [
         },
         children: [
             {
-                path: '/home',
+                path: 'home',
                 name: 'home',
                 meta: {
                     hideInMenu: true,
@@ -50,15 +50,6 @@ export default [
             }
         ]
     },
-    // {
-    //     path: '',
-    //     name: 'doc',
-    //     meta: {
-    //         title: '文档',
-    //         href: 'https://lison16.github.io/iview-admin-doc/#/',
-    //         icon: 'ios-book'
-    //     }
-    // },
     {
         path: '/wu',
         name: 'wu',
@@ -92,7 +83,8 @@ export default [
                 name: 'message_page',
                 meta: {
                     icon: 'md-notifications',
-                    title: '消息中心'
+                    title: '消息中心',
+					access: []
                 },
                 component: () => import('@/view/single-page/message/index.vue')
             }
@@ -235,37 +227,55 @@ export default [
                 },
                 component: () => import('@/view/multilevel/level-2-1.vue')
             },
-            {
-                path: 'level_2_2',
-                name: 'level_2_2',
-                meta: {
-                    access: ['super_admin'],
-                    icon: 'md-funnel',
-                    showAlways: true,
-                    title: '二级-2'
-                },
-                component: parentView,
-                children: [
-                    {
-                        path: 'level_2_2_1',
-                        name: 'level_2_2_1',
-                        meta: {
-                            icon: 'md-funnel',
-                            title: '三级1'
-                        },
-                        component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
-                    },
-                    {
-                        path: 'level_2_2_2',
-                        name: 'level_2_2_2',
-                        meta: {
-                            icon: 'md-funnel',
-                            title: '三级2'
-                        },
-                        component: () => import('@/view/multilevel/level-2-2/level-2-2-2.vue')
-                    }
-                ]
-            },
+			{
+				path: 'level_2_2/level_2_2_1',
+				name: 'level_2_2_1',
+				meta: {
+					icon: 'md-funnel',
+					title: '三级1'
+				},
+				component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
+			},
+			{
+				path: 'level_2_2/level_2_2_2',
+				name: 'level_2_2_2',
+				meta: {
+					icon: 'md-funnel',
+					title: '三级2'
+				},
+				component: () => import('@/view/multilevel/level-2-2/level-2-2-2.vue')
+			},
+            // {
+            //     path: 'level_2_2',
+            //     name: 'level_2_2',
+            //     meta: {
+            //         access: ['super_admin'],
+            //         icon: 'md-funnel',
+            //         // showAlways: true,
+            //         title: '二级-2'
+            //     },
+            //     component: parentView,
+            //     children: [
+            //         {
+            //             path: 'level_2_2_1',
+            //             name: 'level_2_2_1',
+            //             meta: {
+            //                 icon: 'md-funnel',
+            //                 title: '三级1'
+            //             },
+            //             component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
+            //         },
+            //         {
+            //             path: 'level_2_2_2',
+            //             name: 'level_2_2_2',
+            //             meta: {
+            //                 icon: 'md-funnel',
+            //                 title: '三级2'
+            //             },
+            //             component: () => import('@/view/multilevel/level-2-2/level-2-2-2.vue')
+            //         }
+            //     ]
+            // },
             {
                 path: 'level_2_3',
                 name: 'level_2_3',

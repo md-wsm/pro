@@ -1,7 +1,8 @@
 // 国际化设置
 import config from '@/config'
 import { forEach, hasOneOf, objEqual } from '@/libs/tools'
-const { title, useI18n } = config
+
+const { title } = config
 
 export const TOKEN_KEY = 'token'
 
@@ -106,13 +107,9 @@ export const getRouteTitleHandled = (route) => {
 }
 
 export const showTitle = (item, vm) => {
-    let { title, __titleIsFunction__ } = item.meta
+    let { title } = item.meta
     if (!title) return
-    if (useI18n) {
-        if (title.includes('{{') && title.includes('}}') && useI18n) title = title.replace(/({{[\s\S]+?}})/, (m, str) => str.replace(/{{([\s\S]*)}}/, (m, _) => vm.$t(_.trim())))
-        else if (__titleIsFunction__) title = item.meta.title
-        else title = vm.$t(item.name)
-    } else title = (item.meta && item.meta.title) || item.name
+    title = (item.meta && item.meta.title) || item.name
     return title
 }
 
@@ -132,6 +129,7 @@ export const getTagNavListFromLocalstorage = () => {
 
 /**
  * @param {Array} routers 路由列表数组
+ * @param homeName
  * @description 用于找到路由列表中name为home的对象
  */
 export const getHomeRoute = (routers, homeName = 'home') => {
@@ -406,6 +404,27 @@ export const scrollTop = (el, from = 0, to, duration = 500, endCallback) => {
 export const setTitle = (routeItem, vm) => {
     const handledRoute = getRouteTitleHandled(routeItem)
     const pageTitle = showTitle(handledRoute, vm)
-    const resTitle = pageTitle ? `${title} - ${pageTitle}` : title
-    window.document.title = resTitle
+	window.document.title = pageTitle ? `${title} - ${pageTitle}` : title
+}
+
+/**
+ * @description 根据路由表(路由配置文件)获取所有有效路由的path
+ * @param {Array} list 路由表列表
+ * @param {String} path 父路由的path
+ * @returns {Array} 所有有效路由的path列表
+ */
+export const getAllPathByRouter = (list, path = '') => {
+	let arr = []
+	const fn = (list, path) => {
+		for (let item of list) {
+			let _path = (path === '/' ? '' : path) + (item.path.startsWith('/') || item.path === '*' ? item.path : '/' + item.path)
+			if (item.children && item.children.length > 0) {
+				fn(item.children, _path)
+			} else {
+				arr.push(_path)
+			}
+		}
+	}
+	fn(list, path)
+	return arr
 }

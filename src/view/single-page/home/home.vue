@@ -71,7 +71,6 @@ export default {
         }
     },
     mounted () {
-        console.log('首页')
     //
     }
 }

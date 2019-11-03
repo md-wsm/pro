@@ -24,16 +24,16 @@
 	</Layout>
 </template>
 <script>
-	import SideMenu from './components/side-menu'
-	import HeaderBar from './components/header-bar'
-	import TagsNav from './components/tags-nav'
-	import ABackTop from './components/a-back-top'
-	import { mapMutations } from 'vuex'
-	import { getNewTagList, routeEqual } from '@/libs/util'
-	import routers from '@/router/routers'
-	import './main.less'
+    import SideMenu from './components/side-menu'
+    import HeaderBar from './components/header-bar'
+    import TagsNav from './components/tags-nav'
+    import ABackTop from './components/a-back-top'
+    import { mapMutations } from 'vuex'
+    import { getNewTagList, routeEqual } from '@/libs/util'
+    import routers from '@/router/routers'
+    import './main.less'
 
-	export default {
+    export default {
 		name: 'Main',
 		components: {
 			SideMenu,
@@ -51,8 +51,7 @@
 				return this.$store.state.app.tagNavList
 			},
 			cacheList () {
-				const list = ['ParentView', ...this.tagNavList.length ? this.tagNavList.filter(item => !(item.meta && item.meta.notCache)).map(item => item.name) : []]
-				return list
+                return [...this.tagNavList.length ? this.tagNavList.filter(item => !(item.meta && item.meta.notCache)).map(item => item.name) : []]
 			},
 			menuList () {
 				return this.$store.getters.menuList
@@ -83,9 +82,6 @@
 					params,
 					query
 				})
-			},
-			handleCollapsedChange (state) {
-				this.collapsed = state
 			},
 			handleCloseTag (res, type, route) {
 				if (type !== 'others') {

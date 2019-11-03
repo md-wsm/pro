@@ -83,7 +83,7 @@
 		width: 0;
 		height: 5px;
 		content: "";
-		transition: all .4s ease-in-out;
+		transition: all .25s ease-in-out;
 	}
 	.item-active () {
 		width: 50%;
@@ -100,7 +100,7 @@
 				list-style-type: none;
 				margin-right: 30px;
 				cursor: pointer;
-				transition: all .4s ease-in-out;
+				transition: all .25s ease-in-out;
 				color: #E3EAFF;
 				& > i {
 					margin-right: 6px;
