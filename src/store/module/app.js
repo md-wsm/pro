@@ -6,7 +6,9 @@ import {
     getNextRoute,
     routeHasExist,
     routeEqual,
-    getRouteTitleHandled
+    getRouteTitleHandled,
+
+	createTreeByList
 } from '@/libs/util'
 import router from '@/router'
 import routers from '@/router/routers'
@@ -24,10 +26,22 @@ const closePage = (state, route) => {
 export default {
     state: {
         tagNavList: [],
-        homeRoute: {}
+        homeRoute: {},
+
+		list: [{ icon: '_qq', id: '1', name: 'wu_page', parentId: null, routeUrl: '/wu/wu_page', title: '测试单元测试' },
+			{ icon: 'logo-buffer', id: '2', name: 'components', parentId: null, routeUrl: '/components', title: '组件' },
+			{ icon: 'md-arrow-dropdown-circle', id: '3', name: 'tree_select_page', parentId: '2', routeUrl: '/components/tree_select_page', title: '树状下拉选择器' },
+			{ icon: 'ios-infinite', id: '4', name: 'drag_list_page', parentId: '2', routeUrl: '/components/drag_list_page', title: '拖拽列表' },
+			{ icon: 'md-menu', id: '5', name: 'multilevel', parentId: null, routeUrl: '/multilevel', title: '多级菜单' },
+			{ icon: 'md-funnel', id: '6', name: 'level_2_1', parentId: '5', routeUrl: '/multilevel/level_2_1', title: '二级-1' },
+			{ icon: 'md-funnel', id: '7', name: 'level_2_2', parentId: '5', routeUrl: '/multilevel/level_2_2', title: '二级-2' },
+			{ icon: 'md-funnel', id: '8', name: 'level_2_2_1', parentId: '7', routeUrl: '/multilevel/level_2_2/level_2_2_1', title: '三级-1' },
+			{ icon: 'md-funnel', id: '9', name: 'level_2_2_2', parentId: '7', routeUrl: '/multilevel/level_2_2/level_2_2_2', title: '三级-2' }]
     },
     getters: {
-        menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access)
+        // menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access),
+		list_: state => state.list, // 后端返回维度为1的list
+		menuList: (state, getters) => createTreeByList(getters.list_)// 生成的菜单1
     },
     mutations: {
         setHomeRoute (state, routes) {

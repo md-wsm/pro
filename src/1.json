@@ -1,0 +1,80 @@
+[
+	{
+		"title": "测试单元测试",
+		"name": "wu_page",
+		"routeUrl": "/wu/wu_page",
+		"icon": "_qq",
+		"id": "1",
+		"parentId": null
+	},
+	{
+		"title": "组件",
+		"name": "components",
+		"routeUrl": "/components",
+		"icon": "logo-buffer",
+		"id": "2",
+		"parentId": null,
+		"children": [
+			{
+				"title": "树状下拉选择器",
+				"name": "tree_select_page",
+				"routeUrl": "/components/tree_select_page",
+				"icon": "md-arrow-dropdown-circle",
+				"id": "3",
+				"parentId": "2"
+			},
+			{
+				"title": "拖拽列表",
+				"name": "drag_list_page",
+				"routeUrl": "/components/drag_list_page",
+				"icon": "ios-infinite",
+				"id": "4",
+				"parentId": "2"
+			}
+		]
+	},
+	{
+		"title": "多级菜单",
+		"name": "multilevel",
+		"routeUrl": "/multilevel",
+		"icon": "md-menu",
+		"id": "5",
+		"parentId": null,
+		"children": [
+			{
+				"title": "二级-1",
+				"name": "level_2_1",
+				"routeUrl": "/multilevel/level_2_1",
+				"icon": "md-funnel",
+				"id": "6",
+				"parentId": "5"
+			},
+			{
+				"title": "二级-2",
+				"name": "level_2_2",
+				"routeUrl": "/multilevel/level_2_2",
+				"icon": "md-funnel",
+				"id": "7",
+				"parentId": "5",
+				"children": [
+					{
+						"title": "三级-1",
+						"name": "level_2_2_1",
+						"routeUrl": "/multilevel/level_2_2/level_2_2_1",
+						"icon": "md-funnel",
+						"id": "8",
+						"parentId": "7"
+					},
+					{
+						"title": "三级-2",
+						"name": "level_2_2_2",
+						"routeUrl": "/multilevel/level_2_2/level_2_2_2",
+						"icon": "md-funnel",
+						"id": "9",
+						"parentId": "7"
+					}
+				]
+			}
+		]
+	}
+]

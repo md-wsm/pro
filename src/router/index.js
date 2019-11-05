@@ -13,7 +13,7 @@ const router = new Router({
     // mode: 'history'
 })
 const LOGIN_PAGE_NAME = 'login'
-console.log(getAllPathByRouter(routes))
+
 const turnTo = (to, access, next) => {
     if (canTurnTo(to.name, access, routes)) next() // 有权限，可访问
     // else next({ replace: true, name: 'error_401' }) // 无权限，重定向到401页面
@@ -40,19 +40,36 @@ router.beforeEach((to, from, next) => {
             name: homeName // 跳转到homeName页
         })
     } else {
-        if (store.state.user.hasGetInfo) {
-            turnTo(to, store.state.user.access, next)
-        } else {
-            store.dispatch('getUserInfo').then(user => {
-                // 拉取用户信息，通过用户权限和跳转的页面的name来判断是否有权限访问;access必须是一个数组，如：['super_admin'] ['super_admin', 'admin']
-                turnTo(to, user.access, next)
-            }).catch(() => {
-                setToken('')
-                next({
-                    name: 'login'
-                })
-            })
-        }
+    	// 已登录，去往实际页
+		// 可判断是否获取用户信息，若已获取判断是否有权访问该页面，若还未获取需先获取（拉取权限）
+
+		let { path, name } = to
+		if (name === homeName) {
+			next()
+		} else {
+			if (!store.getters.list_.find(item => item.routeUrl === path) && getAllPathByRouter(routes).includes(path) && name !== 'error_401') {
+				console.log('无权限')
+				next({ replace: true, name: 'error_401' })
+				// 这边还需把打开的tab删除掉（如果有的话）tagNavList
+				/// ////
+			} else {
+				next()
+			}
+		}
+
+        // if (store.state.user.hasGetInfo) {
+        //     turnTo(to, store.state.user.access, next)
+        // } else {
+        //     store.dispatch('getUserInfo').then(user => {
+        //         // 拉取用户信息，通过用户权限和跳转的页面的name来判断是否有权限访问;access必须是一个数组，如：['super_admin'] ['super_admin', 'admin']
+        //         turnTo(to, user.access, next)
+        //     }).catch(() => {
+        //         setToken('')
+        //         next({
+        //             name: 'login'
+        //         })
+        //     })
+        // }
     }
 })
 

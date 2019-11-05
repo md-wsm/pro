@@ -428,3 +428,66 @@ export const getAllPathByRouter = (list, path = '') => {
 	fn(list, path)
 	return arr
 }
+
+/**
+ * @description list转树形
+ * @param data {Array} list
+ * @param name {String} list的名称字段
+ * @param title {String} 转成树形后的字段
+ * @param id {String} list的
+ * @param pId {String} list的pId
+ * @param otherSetting {Object} 其他设置
+ * @returns {Array}
+ */
+export const createTreeByList = (data = [], pId = 'parentId', id = 'id', name, title, otherSetting = {}) => {
+	let arr = []
+	data = data.map(item => ({ ...item }))// 性能，注掉，（防止修改里面的共享对象属性）
+	data.forEach(item => {
+		if (name && title) {
+			item[title] = item[name]
+		}
+		for (let key in otherSetting) {
+			item[key] = otherSetting[key]
+		}
+
+		if (name && item[name]) {
+			delete item.children
+			delete item[name]
+		}
+	})
+	let map = {}
+	data.forEach(item => {
+		map[item[id]] = item
+	})
+	data.forEach(item => {
+		let parent = map[item[pId]]
+		if (parent) {
+			(parent.children || (parent.children = [])).push(item)
+		} else {
+			arr.push(item)
+		}
+	})
+	return arr
+}
+
+/**
+ * 通过当前节点id获取所有父级节点id
+ * @param list 一维结构
+ * @param id 当前
+ * @returns {Array} 暂为父级节点id
+ */
+export const getParentsByCurrentId = (list, id) => {
+	let arr = []
+	const fn = (list, id) => {
+		list.forEach(item => {
+			if (item.id === id) {
+				if (item.parentId) {
+					fn(list, item.parentId)
+				}
+				arr.push(item.id)
+			}
+		})
+	}
+	fn(list, id)
+	return arr
+}
