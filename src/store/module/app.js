@@ -25,7 +25,7 @@ const closePage = (state, route) => {
 
 export default {
     state: {
-        tagNavList: [],
+        tagNavList: [{ name: homeName, path: '/' + homeName, title: '首页', routeUrl: '/' + homeName }],
         homeRoute: {},
 
 		list: [{ icon: '_qq', id: '1', name: 'wu_page', parentId: null, routeUrl: '/wu/wu_page', title: '测试单元测试' },
@@ -44,10 +44,20 @@ export default {
 		menuList: (state, getters) => createTreeByList(getters.list_)// 生成的菜单1
     },
     mutations: {
-        setHomeRoute (state, routes) {
+		setTagNavList (state, navList) {
+			state.tagNavList = [{ name: homeName, path: '/' + homeName, title: '首页', routeUrl: '/' + homeName }].concat(navList)
+		},
+		addTag (state, route) {
+			if (!state.tagNavList.find(item => item.routeUrl === route.routeUrl)) {
+				state.tagNavList.push(route)
+				setTagNavListInLocalstorage(state.tagNavList.filter(item => item.name !== homeName))
+			}
+		},
+
+        setHomeRoute2 (state, routes) {
             state.homeRoute = getHomeRoute(routes, homeName)
         },
-        setTagNavList (state, list) {
+        setTagNavList2 (state, list) {
             let tagList = []
             if (list) {
                 tagList = [...list]
@@ -61,13 +71,13 @@ export default {
             state.tagNavList = tagList
             setTagNavListInLocalstorage([...tagList])
         },
-        closeTag (state, route) {
+        closeTag2 (state, route) {
             let tag = state.tagNavList.filter(item => routeEqual(item, route))
             route = tag[0] ? tag[0] : null
             if (!route) return
             closePage(state, route)
         },
-        addTag (state, { route, type = 'unshift' }) {
+        addTag2 (state, { route, type = 'unshift' }) {
             let router = getRouteTitleHandled(route)
             if (!routeHasExist(state.tagNavList, router)) {
                 if (type === 'push') state.tagNavList.push(router)

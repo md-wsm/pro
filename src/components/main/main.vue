@@ -29,21 +29,11 @@
     import TagsNav from './components/tags-nav'
     import ABackTop from './components/a-back-top'
     import { mapMutations, mapGetters } from 'vuex'
-    import { getNewTagList, routeEqual, createTreeByList, getParentsByCurrentId } from '@/libs/util'
+    import { getNewTagList, routeEqual, createTreeByList, getParentsByCurrentId, setTagNavListInLocalstorage, getTagNavListFromLocalstorage } from '@/libs/util'
     import routers from '@/router/routers'
     import './main.less'
 	// import menuList from '@/1.json'
-	let _list = [
-		{ icon: '_qq', id: '1', name: 'wu_page', parentId: null, routeUrl: '/wu/wu_page', title: '测试单元测试' },
-        { icon: 'logo-buffer', id: '2', name: 'components', parentId: null, routeUrl: '/components', title: '组件' },
-        { icon: 'md-arrow-dropdown-circle', id: '3', name: 'tree_select_page', parentId: '2', routeUrl: '/components/tree_select_page', title: '树状下拉选择器' },
-        { icon: 'ios-infinite', id: '4', name: 'drag_list_page', parentId: '2', routeUrl: '/components/drag_list_page', title: '拖拽列表' },
-        { icon: 'md-menu', id: '5', name: 'multilevel', parentId: null, routeUrl: '/multilevel', title: '多级菜单' },
-        { icon: 'md-funnel', id: '6', name: 'level_2_1', parentId: '5', routeUrl: '/multilevel/level_2_1', title: '二级-1' },
-        { icon: 'md-funnel', id: '7', name: 'level_2_2', parentId: '5', routeUrl: '/multilevel/level_2_2', title: '二级-2' },
-        { icon: 'md-funnel', id: '8', name: 'level_2_2_1', parentId: '7', routeUrl: '/multilevel/level_2_2/level_2_2_1', title: '三级-1' },
-        { icon: 'md-funnel', id: '9', name: 'level_2_2_2', parentId: '7', routeUrl: '/multilevel/level_2_2/level_2_2_2', title: '三级-2' }
-	]
+
     export default {
 		name: 'Main',
 		components: {
@@ -56,7 +46,7 @@
 			return {
 				collapsed: false,
 				// menuList: createTreeByList(this.menuList),
-                currentMenuId: '/home',
+                currentMenuId: '',
                 activeName: '',
                 openNames: []
 			}
@@ -133,7 +123,7 @@
 				this.setTagNavList(res)
 			},
 			handleClick (item) {
-				this.turnToPage(item)
+				// this.turnToPage(item)
 			},
             closeMenuOpenNames () {
                 this.activeName = ''
@@ -142,21 +132,40 @@
                     this.$refs.sideMenu.$refs.menu.updateOpened()
                     this.$refs.sideMenu.$refs.menu.updateActiveName()
                 })
-            }
+            },
+			initViewRender (route) {
+                const { name, path } = route
+                if (name === this.homeName) {
+                    this.currentMenuId = ''
+                    this.closeMenuOpenNames()
+                    return
+                }
+
+                let o = this.list_.find(item => item.routeUrl === path)
+                if (o) {
+                    let { id, parentId, name, routeUrl, title } = o
+                    this.addTag({ id, parentId, name, routeUrl, title })
+
+                    this.currentMenuId = id
+                    let parentIds = getParentsByCurrentId(this.list_, id)
+                    this.openNames = parentIds.slice(0, parentIds.length - 1)
+                    this.activeName = id
+                }
+
+                this.$nextTick(() => {
+                    this.$refs.sideMenu.$refs.menu.updateOpened()
+                    this.$refs.sideMenu.$refs.menu.updateActiveName()
+                })
+			}
 		},
 		watch: {
             '$route' (newRoute) {
-                const { name, query, params, meta, path } = newRoute
+               this.initViewRender(newRoute)
 
-				if (name === this.homeName) {
-                    this.currentMenuId = name
-                    this.closeMenuOpenNames()
-				}
-
-                this.addTag({
-                    route: { name, query, params, meta },
-                    type: 'push'
-                })
+                // this.addTag({
+                //     route: { name, query, params, meta },
+                //     type: 'push'
+                // })
                 // this.setTagNavList(getNewTagList(this.tagNavList, newRoute))
                 // this.$refs.sideMenu.updateOpenName(newRoute.name)
             }
@@ -169,23 +178,81 @@
 			// 	this.setTagNavList(getNewTagList(this.tagNavList, newRoute))
 			// 	// this.$refs.sideMenu.updateOpenName(newRoute.name)
 			// }
+            // activeName () {
+            //     this.$nextTick(() => {
+            //         //this.$refs.sideMenu.$refs.menu.updateOpened()
+            //        // this.$refs.sideMenu.$refs.menu.updateActiveName()
+            //     })
+			// }
 		},
-		mounted () {
+		created () {
 			/**
 			 * @description 初始化设置面包屑导航和标签导航
 			 */
-			this.setTagNavList()
+			this.setTagNavList(getTagNavListFromLocalstorage())
 			// this.setHomeRoute(routers)
-			const { name, params, query, meta } = this.$route
+			// const { name, params, query, meta, path } = this.$route
+            // this.addTag( this.$route)
+			// console.log(this.tagNavList)
+
+			// this.$nextTick(() => this.initViewRender(this.$route))
+
+            const { name, path } = this.$route
+            if (name === this.homeName) {
+                this.currentMenuId = ''
+                this.closeMenuOpenNames()
+                return
+            }
+
+            let o = this.list_.find(item => item.routeUrl === path)
+            if (o) {
+                let { id, parentId, name, routeUrl, title } = o
+                this.addTag({ id, parentId, name, routeUrl, title })
+
+                this.currentMenuId = id
+                let parentIds = getParentsByCurrentId(this.list_, id)
+                this.openNames = parentIds.slice(0, parentIds.length - 1)
+                this.activeName = id
+				setTimeout(() => {
+                    this.$refs.sideMenu.$refs.menu.updateActiveName()
+                    this.$refs.sideMenu.$refs.menu.updateOpened()
+				}, 150)
+            }
+
+            // console.log(this.tagNavList);this.$nextTick(()=>setTagNavListInLocalstorage(this.tagNavList))
 			// this.addTag({
 			// 	route: { name, params, query, meta }
 			// })
 			// 如果当前打开页面不在标签栏中，跳到homeName页
-			if (!this.tagNavList.find(item => item.name === this.$route.name)) {
-				this.$router.push({
-					name: this.homeName
-				})
-			}
-		}
-	}
+			// if (!this.tagNavList.find(item => item.name === this.$route.name)) {
+			// 	this.$router.push({
+			// 		name: this.homeName
+			// 	})
+			// }
+		},
+		created1 () {
+            // const { name, path } = this.$route
+            // if (name === this.homeName) {
+            //     this.currentMenuId = ''
+            //     this.closeMenuOpenNames()
+            //     return
+            // }
+			//
+            // let o = this.list_.find(item => item.routeUrl === path)
+            // if (o) {
+            //     let { id, parentId, name, routeUrl, title } = o
+            //     this.addTag({ id, parentId, name, routeUrl, title })
+			//
+            //     this.currentMenuId = id
+            //     let parentIds = getParentsByCurrentId(this.list_, id)
+            //     this.openNames = parentIds.slice(0, parentIds.length - 1)
+            //     this.activeName = id
+            // }
+			//
+            // this.$nextTick(() => {
+            //     this.$refs.sideMenu.$refs.menu.updateOpened()
+            //     this.$refs.sideMenu.$refs.menu.updateActiveName()
+            // })
+        }
+    }
 </script>

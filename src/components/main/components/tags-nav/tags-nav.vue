@@ -143,7 +143,8 @@
 				}
             },
             showTitleInside (item) {
-                return showTitle(item, this)
+ return item.title
+               // return showTitle(item, this)
             },
             isCurrentTag (item) {
                 return routeEqual(this.currentRouteObj, item)

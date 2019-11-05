@@ -23,7 +23,7 @@
 
     export default {
         name: 'SideMenu',
-        mixins: [mixin],
+        // mixins: [mixin],
         components: {
             SideMenuItem,
             CollapsedMenu,
@@ -60,17 +60,11 @@
             openNames: {
                 type: Array,
                 default: () => []
-            },
-
-			// wjl
-            openedNames: {
-                type: Array,
-                default: () => []
-			}
+            }
         },
         data () {
             return {
-                // openedNames: []
+                openedNames: []
             }
         },
         methods: {
@@ -94,6 +88,17 @@
             }
         },
         watch: {
+            // openNames (n) {
+            //             this.$nextTick(() => {console.log(n)
+            //                 this.$refs.menu.updateOpened()
+            //             })
+			// },
+            // activeName (n) {
+            //     this.$nextTick(() => {console.log(n);
+            //         this.$refs.menu.updateActiveName()
+            //     })
+			// }
+
             // activeName (name) {
             //     if (this.accordion) {
             //         this.openedNames = this.getOpenedNamesByActiveName(name)
@@ -101,17 +106,7 @@
             //         this.openedNames = getUnion(this.openedNames, this.getOpenedNamesByActiveName(name))
             //     }
             // },
-            // openNames (newNames) {
-            //         this.$nextTick(() => {
-            //             this.$refs.menu.updateOpened()
-            //         })
-                // this.openedNames = newNames
-            // },
-            // openedNames () {
-            //     this.$nextTick(() => {
-            //         this.$refs.menu.updateOpened()
-            //     })
-            // }
+
         },
         mounted () {
             // console.log(this.menuList)

@@ -212,8 +212,10 @@ export const getParams = url => {
 export const getNextRoute = (list, route) => {
     let res = {}
     if (list.length === 2) {
+ console.log(222)
         res = getHomeRoute(list)
     } else {
+ console.log(9999)
         const index = list.findIndex(item => routeEqual(item, route))
         if (index === list.length - 1) res = list[list.length - 2]
         else res = list[index + 1]
