@@ -25,7 +25,7 @@ const closePage = (state, route) => {
 
 export default {
     state: {
-        tagNavList: [{ name: homeName, path: '/' + homeName, title: '首页', routeUrl: '/' + homeName }],
+        tagNavList: [{ id: '', name: homeName, path: '/' + homeName, title: '首页', routeUrl: '/' + homeName }],
         homeRoute: {},
 
 		list: [{ icon: '_qq', id: '1', name: 'wu_page', parentId: null, routeUrl: '/wu/wu_page', title: '测试单元测试' },
@@ -45,7 +45,7 @@ export default {
     },
     mutations: {
 		setTagNavList (state, navList) {
-			state.tagNavList = [{ name: homeName, path: '/' + homeName, title: '首页', routeUrl: '/' + homeName }].concat(navList)
+			state.tagNavList = [{ id: '', name: homeName, path: '/' + homeName, title: '首页', routeUrl: '/' + homeName }].concat(navList)
 		},
 		addTag (state, route) {
 			if (!state.tagNavList.find(item => item.routeUrl === route.routeUrl)) {
@@ -53,11 +53,17 @@ export default {
 				setTagNavListInLocalstorage(state.tagNavList.filter(item => item.name !== homeName))
 			}
 		},
+		closeTag (state, route) {
+
+		},
+		setTagNavList2 (state, index) {
+			state.tagNavList.splice(index, 1)
+		},
 
         setHomeRoute2 (state, routes) {
             state.homeRoute = getHomeRoute(routes, homeName)
         },
-        setTagNavList2 (state, list) {
+        setTagNavList22 (state, list) {
             let tagList = []
             if (list) {
                 tagList = [...list]

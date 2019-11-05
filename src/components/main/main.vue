@@ -71,7 +71,8 @@
 				'setTagNavList',
 				'addTag',
 				'setHomeRoute',
-				'closeTag'
+				'closeTag',
+				'setTagNavList2'
 			]),
 			turnToPage (route) {
 				let { name, params, query } = {}
@@ -122,8 +123,40 @@
 				}
 				this.setTagNavList(res)
 			},
-			handleClick (item) {
-				// this.turnToPage(item)
+            handleCloseTag (item, index) {
+				this.setTagNavList2(index)
+                if (this.currentMenuId === item.id) {
+                    if (this.tagNavList[index]) {
+                        this.handleClick(this.tagNavList[index])
+                    } else if (this.tagNavList[index - 1]) {
+                        this.handleClick(this.tagNavList[index - 1])
+                    } else {
+                        this.currentMenuId = ''
+                        this.closeMenuOpenNames()
+                        this.$router.push('/home')
+                    }
+                }
+			},
+			handleClick (_item) {
+			    if (this.currentMenuId === _item.id) {
+			        return
+				}
+                this.currentMenuId = _item.id
+				if (_item.name === this.homeName) {
+                    this.openNames = []
+                    this.$router.push('/home')
+				} else {
+                    let parentIds = getParentsByCurrentId(this.list_, _item.id)
+                    this.openNames = parentIds.slice(0, parentIds.length - 1)
+                    this.$router.push({
+                        path: _item.routeUrl
+                    })
+				}
+                this.activeName = this.currentMenuId
+                this.$nextTick(() => {
+                    this.$refs.sideMenu.$refs.menu.updateOpened()
+                    this.$refs.sideMenu.$refs.menu.updateActiveName()
+                })
 			},
             closeMenuOpenNames () {
                 this.activeName = ''
@@ -152,10 +185,11 @@
                     this.activeName = id
                 }
 
-                this.$nextTick(() => {
+                // 哎真不明白初次渲染时使用nextTick无效
+                setTimeout(() => {
                     this.$refs.sideMenu.$refs.menu.updateOpened()
                     this.$refs.sideMenu.$refs.menu.updateActiveName()
-                })
+                }, 150)
 			}
 		},
 		watch: {
@@ -185,39 +219,17 @@
             //     })
 			// }
 		},
-		created () {
+		mounted () {
 			/**
 			 * @description 初始化设置面包屑导航和标签导航
 			 */
 			this.setTagNavList(getTagNavListFromLocalstorage())
 			// this.setHomeRoute(routers)
 			// const { name, params, query, meta, path } = this.$route
-            // this.addTag( this.$route)
+
 			// console.log(this.tagNavList)
 
-			// this.$nextTick(() => this.initViewRender(this.$route))
-
-            const { name, path } = this.$route
-            if (name === this.homeName) {
-                this.currentMenuId = ''
-                this.closeMenuOpenNames()
-                return
-            }
-
-            let o = this.list_.find(item => item.routeUrl === path)
-            if (o) {
-                let { id, parentId, name, routeUrl, title } = o
-                this.addTag({ id, parentId, name, routeUrl, title })
-
-                this.currentMenuId = id
-                let parentIds = getParentsByCurrentId(this.list_, id)
-                this.openNames = parentIds.slice(0, parentIds.length - 1)
-                this.activeName = id
-				setTimeout(() => {
-                    this.$refs.sideMenu.$refs.menu.updateActiveName()
-                    this.$refs.sideMenu.$refs.menu.updateOpened()
-				}, 150)
-            }
+            this.initViewRender(this.$route)
 
             // console.log(this.tagNavList);this.$nextTick(()=>setTagNavListInLocalstorage(this.tagNavList))
 			// this.addTag({
@@ -229,30 +241,6 @@
 			// 		name: this.homeName
 			// 	})
 			// }
-		},
-		created1 () {
-            // const { name, path } = this.$route
-            // if (name === this.homeName) {
-            //     this.currentMenuId = ''
-            //     this.closeMenuOpenNames()
-            //     return
-            // }
-			//
-            // let o = this.list_.find(item => item.routeUrl === path)
-            // if (o) {
-            //     let { id, parentId, name, routeUrl, title } = o
-            //     this.addTag({ id, parentId, name, routeUrl, title })
-			//
-            //     this.currentMenuId = id
-            //     let parentIds = getParentsByCurrentId(this.list_, id)
-            //     this.openNames = parentIds.slice(0, parentIds.length - 1)
-            //     this.activeName = id
-            // }
-			//
-            // this.$nextTick(() => {
-            //     this.$refs.sideMenu.$refs.menu.updateOpened()
-            //     this.$refs.sideMenu.$refs.menu.updateActiveName()
-            // })
-        }
+		}
     }
 </script>

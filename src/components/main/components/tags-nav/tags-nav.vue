@@ -11,9 +11,9 @@
 				</DropdownMenu>
 			</Dropdown>
 		</div>
-		<ul v-show="visible" :style="{left: contextMenuLeft + 'px', top: contextMenuTop + 'px'}" class="contextmenu">
-			<li v-for="(item, key) of menuList" @click="handleTagsOption(key)" :key="key">{{item}}</li>
-		</ul>
+<!--		<ul v-show="visible" :style="{left: contextMenuLeft + 'px', top: contextMenuTop + 'px'}" class="contextmenu">-->
+<!--			<li v-for="(item, key) of menuList" @click="handleTagsOption(key)" :key="key">{{item}}</li>-->
+<!--		</ul>-->
 		<div class="btn-con left-btn">
 			<Button type="text" @click="handleScroll(240)">
 				<Icon :size="18" type="ios-arrow-back"/>
@@ -34,12 +34,12 @@
 						:key="`tag-nav-${index}`"
 						:name="item.name"
 						:data-route-item="item"
-						@on-close="handleClose(item)"
+						@on-close="handleClose(item, index)"
 						@click.native="handleClick(item)"
 						:closable="item.name !== $config.homeName"
 						:color="isCurrentTag(item) ? 'primary' : 'default'"
 						@contextmenu.prevent.native="contextMenu(item, $event)"
-					>{{ showTitleInside(item) }}
+					>{{ item.title }}
 					</Tag>
 				</transition-group>
 			</div>
@@ -122,7 +122,7 @@
                     }, 100)
                 }
             },
-            handleClose (current) {
+            handleClose (current, index) {
                 if (current.meta && current.meta.beforeCloseName && current.meta.beforeCloseName in beforeClose) {
                     new Promise(beforeClose[current.meta.beforeCloseName]).then(close => {
                         if (close) {
@@ -130,21 +130,19 @@
                         }
                     })
                 } else {
-                    this.close(current)
+                    this.close(current, index)
                 }
             },
-            close (route) {
-                let res = this.list.filter(item => !routeEqual(route, item))
-                this.$emit('on-close', res, undefined, route)
+            close (route, index) {
+                // let res = this.list.filter(item => !routeEqual(route, item))
+                // this.$emit('on-close', res, undefined, route)
+                this.$emit('on-close', route, index)
             },
             handleClick (item) {
-                if (!this.isCurrentTag(item)) {
-                    this.$emit('input', item)
-				}
+                this.$emit('input', item)
             },
             showTitleInside (item) {
- return item.title
-               // return showTitle(item, this)
+               return showTitle(item, this)
             },
             isCurrentTag (item) {
                 return routeEqual(this.currentRouteObj, item)
