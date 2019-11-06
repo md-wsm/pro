@@ -22,5 +22,12 @@ export default {
    * @description 需要加载的插件
    */
     plugin: {
-    }
+    },
+
+	/**
+	 * @description 标签tab列表默认有首页
+	 */
+	initTagNavList: (homeName) => {
+		return [{ id: '', name: homeName, path: '/' + homeName, title: '首页', routeUrl: '/' + homeName }]
+	}
 }

@@ -18,6 +18,7 @@
 <script>
     import SideMenuItem from './side-menu-item.vue'
     import CollapsedMenu from './collapsed-menu.vue'
+	import MySubmenu from './MySubmenu'
     import { getUnion } from '@/libs/tools'
     import mixin from './mixin'
 
@@ -27,7 +28,7 @@
         components: {
             SideMenuItem,
             CollapsedMenu,
-            MySubmenu: () => import('./MySubmenu')
+            MySubmenu
         },
         props: {
             menuList: {

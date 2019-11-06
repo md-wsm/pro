@@ -6,8 +6,8 @@
 					<Icon :size="18" type="ios-close-circle-outline"/>
 				</Button>
 				<DropdownMenu slot="list">
-					<DropdownItem name="close-all">关闭所有</DropdownItem>
-					<DropdownItem name="close-others">关闭其他</DropdownItem>
+					<DropdownItem name="all">关闭所有</DropdownItem>
+					<DropdownItem name="others">关闭其他</DropdownItem>
 				</DropdownMenu>
 			</Dropdown>
 		</div>
@@ -78,8 +78,8 @@
         },
         computed: {
             currentRouteObj () {
-                const { name, params, query } = this.value
-                return { name, params, query }
+                const { name, params, query, path } = this.value
+                return { name, params, query, path }
             }
         },
         methods: {
@@ -111,12 +111,14 @@
             handleTagsOption (type) {
                 if (type.includes('all')) {
                     // 关闭所有，除了home
-                    let res = this.list.filter(item => item.name === this.$config.homeName)
-                    this.$emit('on-close', res, 'all')
+                    // let res = this.list.filter(item => item.name === this.$config.homeName)
+                    this.$emit('on-close-all-other', type, [])
                 } else if (type.includes('others')) {
+                    let res = this.list.find(item => item.name !== this.$config.homeName && this.currentRouteObj.path === item.routeUrl)
                     // 关闭除当前页和home页的其他页
-                    let res = this.list.filter(item => routeEqual(this.currentRouteObj, item) || item.name === this.$config.homeName)
-                    this.$emit('on-close', res, 'others', this.currentRouteObj)
+                    // let res = this.list.filter(item => routeEqual(this.currentRouteObj, item) || item.name === this.$config.homeName)
+                    // this.$emit('on-close', res, 'others', this.currentRouteObj)
+                    this.$emit('on-close-all-other', type, res ? [res] : [])
                     setTimeout(() => {
                         this.getTagElementByRoute(this.currentRouteObj)
                     }, 100)
@@ -126,7 +128,7 @@
                 if (current.meta && current.meta.beforeCloseName && current.meta.beforeCloseName in beforeClose) {
                     new Promise(beforeClose[current.meta.beforeCloseName]).then(close => {
                         if (close) {
-                            this.close(current)
+                            this.close(current, index)
                         }
                     })
                 } else {
@@ -145,7 +147,8 @@
                return showTitle(item, this)
             },
             isCurrentTag (item) {
-                return routeEqual(this.currentRouteObj, item)
+                // return routeEqual(this.currentRouteObj, item)
+				return item.routeUrl === this.currentRouteObj.path
             },
             moveToView (tag) {
                 const outerWidth = this.$refs.scrollOuter.offsetWidth

@@ -21,10 +21,6 @@ export default [
     {
         path: '/login',
         name: 'login',
-        meta: {
-            title: 'Login - 登录',
-            hideInMenu: true
-        },
         component: () => import('@/view/login/login.vue')
     },
 	{
@@ -38,68 +34,38 @@ export default [
 			{
 				path: 'home',
 				name: 'home',
-				meta: {
-					hideInMenu: true,
-					title: '首页',
-					notCache: true,
-					icon: 'md-home'
-				},
 				component: () => import('@/view/single-page/home')
 			},
 			{
 				path: 'wu/wu_page',
 				name: 'wu_page',
-				meta: {
-					icon: '_qq',
-					title: '测试单元测试'
-				},
 				component: () => import('@/view/join-page.vue')
 			},
 
 			{
 				path: 'components/tree_select_page',
 				name: 'tree_select_page',
-				meta: {
-					icon: 'md-arrow-dropdown-circle',
-					title: '树状下拉选择器'
-				},
 				component: () => import('@/view/components/tree-select/index.vue')
 			},
 			{
 				path: 'components/drag_list_page',
 				name: 'drag_list_page',
-				meta: {
-					icon: 'ios-infinite',
-					title: '拖拽列表'
-				},
 				component: () => import('@/view/components/drag-list/drag-list.vue')
 			},
 
 			{
-				path: 'multilevel/level_2_1',
+				path: 'multilevel/level_2_2',
 				name: 'level_2_1',
-				meta: {
-					icon: 'md-funnel',
-					title: '二级111111'
-				},
 				component: () => import('@/view/multilevel/level-2-1.vue')
 			},
 			{
 				path: 'multilevel/level_2_2/level_2_2_1',
 				name: 'level_2_2_1',
-				meta: {
-					icon: 'md-funnel',
-					title: '三级111111'
-				},
 				component: () => import('@/view/multilevel/level-2-2/level-2-2-1.vue')
 			},
 			{
 				path: 'aa/bb',
 				name: 'bb',
-				meta: {
-					icon: 'md-funnel',
-					title: '三级111111'
-				},
 				component: () => import('@/view/components/drag-list/drag-list.vue')
 			}
 		]
@@ -107,25 +73,16 @@ export default [
 	{
 		path: '/401',
 		name: 'error_401',
-		meta: {
-			hideInMenu: true
-		},
 		component: () => import('@/view/error-page/401.vue')
 	},
 	{
 		path: '/500',
 		name: 'error_500',
-		meta: {
-			hideInMenu: true
-		},
 		component: () => import('@/view/error-page/500.vue')
 	},
 	{
 		path: '*',
 		name: 'error_404',
-		meta: {
-			hideInMenu: true
-		},
 		component: () => import('@/view/error-page/404.vue')
 	}
 ]

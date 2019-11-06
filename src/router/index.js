@@ -49,6 +49,10 @@ router.beforeEach((to, from, next) => {
 		} else {
 			if (!store.getters.list_.find(item => item.routeUrl === path) && getAllPathByRouter(routes).includes(path) && name !== 'error_401') {
 				console.log('无权限')
+				let index = store.state.app.tagNavList.findIndex(item => item.routeUrl === path)
+				if (index > -1) {
+					store.commit('delOneTagNavList', index)
+				}
 				next({ replace: true, name: 'error_401' })
 				// 这边还需把打开的tab删除掉（如果有的话）tagNavList
 				/// ////

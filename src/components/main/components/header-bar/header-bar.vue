@@ -5,8 +5,8 @@
 		</div>
 		<div class="big-menu">
 			<ul class="menu-list">
-				<li :class="{'menu-item': true, active: item.active}" v-for="(item, index) in menuList" :key="index" @click="handleClickItem(index)">
-					<Icon type="ios-people" />{{ item.name }}
+				<li :class="{'menu-item': true, active: item.id === headerMenuId}" v-for="item in headerMenuList" :key="item.id" @click="handleClickItem(item)">
+					<Icon :type="item.icon" />{{ item.title }}
 				</li>
 			</ul>
 		</div>
@@ -22,6 +22,7 @@
 <script>
 	import logo from '@/assets/images/logo.png'
     import logout from '@/assets/images/logout.png'
+	import { mapGetters, mapState } from 'vuex'
 
     export default {
         name: 'HeaderBar',
@@ -31,18 +32,24 @@
         data () {
             return {
                 logo,
-                logout,
-                menuList: [{ name: '系统管理', active: false }, { name: '系统字典', active: false }, { name: '租户管理', active: false }, { name: '子系统数据', active: false }]
+                logout
+                // menuList: [{ name: '系统管理', active: false }, { name: '系统字典', active: false }, { name: '租户管理', active: false }, { name: '子系统数据', active: false }]
             }
         },
         computed: {
+            ...mapGetters(['headerMenuList']),
+			...mapState({
+                headerMenuId: state => state.app.headerMenuId
+			})
         },
         methods: {
-            handleClickItem (index) {
-                this.menuList.forEach(item => {
-                    item.active = false
-				})
-                this.menuList[index].active = true
+            handleClickItem (item) {
+                // this.menuList.forEach(item => {
+                //     item.active = false
+				// })
+                // this.menuList[index].active = true
+
+				this.$store.commit('setHeaderMenuId', item.id)
 			}
         }
     }
